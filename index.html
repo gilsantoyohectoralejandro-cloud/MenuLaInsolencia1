@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú - La Insolencia</title>
+    <style>
+        /* ESTILOS GENERALES Y PORTADA */
+        body {
+            background-color: #000;
+            color: white;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .hero-section {
+            background: linear-gradient(to bottom, #1a1a1a 0%, #4a0e1c 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 15px solid #000;
+            box-sizing: border-box;
+        }
+
+        .border-container {
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 50px 20px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .main-title {
+            font-size: clamp(2rem, 8vw, 4.5rem);
+            letter-spacing: 10px;
+            margin: 0;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            margin-top: -5px;
+            font-style: italic;
+            color: #ccc;
+        }
+
+        .contact-info {
+            margin-top: 60px;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: #eee;
+        }
+
+        /* SECCIÓN DE MENÚ */
+        .menu-page {
+            padding: 60px 20px;
+            max-width: 1100px; 
+            margin: auto;
+            background-color: #000;
+        }
+
+        .category-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            color: #fff;
+            border-bottom: 3px solid #a31d31;
+            margin-bottom: 50px;
+            letter-spacing: 8px;
+            font-weight: 200;
+            text-transform: uppercase;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 50px;
+        }
+
+        h3 {
+            color: #a31d31;
+            border-left: 4px solid #a31d31;
+            padding-left: 15px;
+            text-transform: uppercase;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            margin-top: 20px;
+            letter-spacing: 2px;
+        }
+
+        .item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .item-header {
+            display: flex;
+            align-items: baseline; /* Alinea texto y precio por la base */
+            font-weight: bold;
+            font-size: 1.05rem;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        /* Línea de puntos entre platillo y precio */
+        .item-header span:first-child {
+            flex-shrink: 0;
+            max-width: 80%;
+        }
+        
+        .item-header::after {
+            content: "";
+            flex-grow: 1;
+            border-bottom: 1px dotted #444;
+            margin: 0 10px;
+        }
+
+        .price {
+            color: #e4b242; /* Dorado para resaltar el costo */
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .description {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin: 5px 0;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        /* Badge para elementos NUEVOS */
+        .new-badge {
+            background-color: #a31d31;
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
+        .prices-list {
+            list-style: none;
+            padding: 8px;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #e4b242; 
+            border: 1px solid #333;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* DISEÑO DE COMBOS Y CHAROLAS */
+        .combo-card {
+            background: #111;
+            border: 1px solid #333;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .combo-card:hover {
+            border-color: #a31d31;
+            transform: translateY(-5px);
+        }
+
+        .highlight-price {
+            font-size: 2rem;
+            color: #e4b242;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 850px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-title {
+                font-size: 2.5rem;
+            }
+            .item-header {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-section">
+        <div class="border-container">
+            <h1 class="main-title">LA INSOLENCIA</h1>
+            <p class="subtitle">Restaurante</p>
+            <div class="contact-info">
+                <p>SERVICIO A DOMICILIO</p>
+                <p>📞 (668) 813 0939 | (668) 176 4067</p>
+                <p>📍 LOS MOCHIS</p>
+            </div>
+        </div>
+    </header>
+
+    <main id="menu-container">
+        <section class="menu-page">
+            <h2 class="category-title">ENTRADAS Y PAPAS</h2>
+            <div class="menu-grid">
+                <div class="menu-column">
+                    <h3>ENTRADAS</h3>
+                    <div class="item">
+                        <div class="item-header"><span>PAPAS SAZONADAS</span> <span class="price">$60</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>AROS DE CEBOLLA</span> <span class="price">$40</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>DEDOS DE QUESO</span> <span class="price">$60</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>BOLITAS DE QUESO</span> <span class="price">$60</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>LA QUESOPORTE FRIES</span> <span class="price">$105</span></div>
+                        <p class="description">Papas bañadas en mix de queso y tocino en trozos.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>PAPAS FRANCESAS</span> <span class="price">$40</span></div>
+                    </div>
+
+                    <h3>DEL MAR</h3>
+                    <div class="item">
+                        <div class="item-header"><span>TOSTADA DE ATÚN C/MANGO</span> <span class="price">$95</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>TOSTADA AGUACHILE</span> <span class="price">$105</span></div>
+                        <p class="description">Verde, Roja o Negra.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>TOSTADA CAMARÓN COCIDO</span> <span class="price">$105</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>SASHIMI ATÚN</span> <span class="price">$160</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-column">
+                    <h3>ESPECIALIDADES EN PAPA</h3>
+                    <div class="item">
+                        <div class="item-header"><span>CARNIPAPAS</span> <span class="price">$140</span></div>
+                        <p class="description">Sirloin envuelto en queso chester, queso cheesewizz, aguacate, cebolla guisada y chile.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>CHICKEN PAPAS <span class="new-badge">NUEVO</span></span> <span class="price">$140</span></div>
+                        <p class="description">Cama de papas a la francesa y pollo a la plancha envuelto en queso chester.</p>
+                    </div>
+
+                    <h3>MARISCADA</h3>
+                    <div class="item">
+                        <div class="item-header"><span>PARA PICAR</span> <span class="price">$180</span></div>
+                        <p class="description">Camarón cocido y camarón ahogado, cebolla, pepino y chiltepín.</p>
+                    </div>
+
+                    <h3>POSTRES</h3>
+                    <div class="item">
+                        <div class="item-header"><span>CHEESECAKE LOTUS</span> <span class="price">$140</span></div>
+                        <p class="description">Base de galleta y mantequilla, mousse de lotus y spread de lotus.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-page">
+            <h2 class="category-title">BONELESS, ALITAS Y TORTAS</h2>
+            <div class="menu-grid">
+                <div class="menu-column">
+                    <h3>BONELESS</h3>
+                    <div class="item">
+                        <div class="item-header"><span>ORDEN CHICA</span> <span class="price">$160</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>ORDEN GRANDE</span> <span class="price">$195</span></div>
+                    </div>
+                    
+                    <h3>PAPAS BONELESS</h3>
+                    <div class="item">
+                        <div class="item-header"><span>ORDEN CHICA</span> <span class="price">$120</span></div>
+                        <p class="description">Cama de papa francesa, boneless, cheez whiz, ranch y parmesano.</p>
+                    </div>
+
+                    <h3>ALITAS</h3>
+                    <div class="item">
+                        <div class="item-header"><span>ORDEN CHICA</span> <span class="price">$140</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>ORDEN GRANDE</span> <span class="price">$180</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>2KG DE ALITAS</span> <span class="price">$499</span></div>
+                    </div>
+                    <p class="prices-list" style="color: #ffc1c1; border-color: #a31d31; background: #2b0a10;">SALSAS: BBQ, BÚFALO, MANGO HABANERO, BBQ HOT, SPICY PARMESANO, TAMARINDO CHILTEPÍN.</p>
+                </div>
+
+                <div class="menu-column">
+                    <h3>TORTAS</h3>
+                    <div class="item">
+                        <div class="item-header"><span>EXTREMA</span> <span class="price">$160</span></div>
+                        <p class="description">Sirloin, chester, philadelphia, jamón, tocino, aguacate y más.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>ESPECIAL</span> <span class="price">$140</span></div>
+                        <p class="description">Sirloin, chester, jamón, tomate, cebolla guisada y guacamole.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>ARRACHERA</span> <span class="price">$170</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>ARRACHERA EXTREMA <span class="new-badge">NUEVO</span></span> <span class="price">$210</span></div>
+                        <p class="description">Arrachera gratinada con chester, philadelphia y tocino.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-page">
+            <h2 class="category-title">HAMBURGUESAS</h2>
+            <div class="menu-grid">
+                <div class="menu-column">
+                    <div class="item">
+                        <div class="item-header"><span>CLÁSICA</span> <span class="price">$89</span></div>
+                        <p class="description">200gr de carne, queso americano, lechuga, tomate y cebolla.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>ABUSIVA</span> <span class="price">$120</span></div>
+                        <p class="description">Carne de res, chile anaheim, queso chester y guacamole.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>ATREVIDA</span> <span class="price">$165</span></div>
+                        <p class="description">Carne envuelta en tocino + chile envuelto en tocino.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>INSOLENTE</span> <span class="price">$170</span></div>
+                        <p class="description">Queso philadelphia, tocino y porción de guacamole.</p>
+                    </div>
+                </div>
+                <div class="menu-column">
+                    <div class="item">
+                        <div class="item-header"><span>DESCARADA</span> <span class="price">$180</span></div>
+                        <p class="description">Res, pollo asado, sirloin asado y camarón.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>LA IMPRUDENTE</span> <span class="price">$170</span></div>
+                        <p class="description">Con una gran rebanada de queso chester empanizado.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>LA EXÓTICA</span> <span class="price">$160</span></div>
+                        <p class="description">Piña asada, tocino y salsa teriyaki.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>LA LIGERITA</span> <span class="price">$78</span></div>
+                        <p class="description">Sin panes. 200gr de carne, lechuga y aguacate.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-page">
+            <h2 class="category-title">PAQUETES Y COMBOS</h2>
+            <div class="menu-grid">
+                <div class="combo-card">
+                    <h3>PAQUETE 1</h3>
+                    <p class="highlight-price">$595</p>
+                    <p class="description">1 Fresca, 1 Torta Sirloin, 1 Boneless Chicos, 1 Alitas Chicas, Papas y 2L Té.</p>
+                </div>
+                <div class="combo-card">
+                    <h3>PAQUETE 2</h3>
+                    <p class="highlight-price">$600</p>
+                    <p class="description">1 Insolente, 1 Torta Sirloin, Papas Sazonadas, Dedos de Queso, Aros, Boneless y 2L Té.</p>
+                </div>
+                <div class="combo-card">
+                    <h3>COMBO 1</h3>
+                    <p class="highlight-price">$160</p>
+                    <p class="description">Hamburguesa Fresca + 5 pzas Boneless + Papas.</p>
+                </div>
+                <div class="combo-card">
+                    <h3>COMBO 2</h3>
+                    <p class="highlight-price">$180</p>
+                    <p class="description">Torta Especial + 5 pzas Boneless + Papas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-page">
+            <h2 class="category-title">SUSHIS</h2>
+            <div class="menu-grid">
+                <div class="menu-column">
+                    <h3>ENTRADAS</h3>
+                    <div class="item">
+                        <div class="item-header"><span>CHIRI EBI (2 pzas)</span> <span class="price">$90</span></div>
+                        <p class="description">Relleno de camarón y queso chester, con aderezo chipotle.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>CHIRI KANI (2 pzas)</span> <span class="price">$70</span></div>
+                        <p class="description">Relleno de tampico y queso philadelphia.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>BOLL GOLL</span> <span class="price">$100</span></div>
+                    </div>
+
+                    <h3>PLATILLOS</h3>
+                    <div class="item">
+                        <div class="item-header"><span>TERIYAKI</span></div>
+                        <p class="description">Brócoli, coliflor, zanahoria y cebolla con arroz blanco.</p>
+                        <div class="prices-list">POLLO: $110 | CAMARÓN: $130 | MIXTO: $140 | SIRLOIN: $130</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>YAKIMESHI</span></div>
+                        <p class="description">Arroz frito, tampico, philadelphia, aguacate y anguila.</p>
+                        <div class="prices-list">POLLO: $110 | CAMARÓN: $130 | SIRLOIN: $130</div>
+                    </div>
+                </div>
+
+                <div class="menu-column">
+                    <h3>SUSHIS NATURALES</h3>
+                    <div class="item">
+                        <div class="item-header"><span>CALIFORNIA ROLL</span></div>
+                        <p class="description">Philadelphia, pepino y ajonjolí por fuera.</p>
+                        <div class="prices-list">SURI: $80 | POLLO: $85 | SIRLOIN: $90 | CAMARÓN: $90</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>AVOCADO ROLL</span></div>
+                        <p class="description">Philadelphia, pepino y aguacate por fuera.</p>
+                        <div class="prices-list">SURI: $80 | SIRLOIN: $90 | CAMARÓN: $90</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>FUCHUL ROLL</span> <span class="price">$145</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>NAMAIKI</span> <span class="price">$155</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-column">
+                    <h3>ESPECIALES / HORNEADOS</h3>
+                    <div class="item">
+                        <div class="item-header"><span>TENGOKU</span> <span class="price">$170</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>ITAZURA</span> <span class="price">$160</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><span>SHITTO (Horneado)</span> <span class="price">$165</span></div>
+                        <p class="description">Atún spicy gratinado con serrano y tocino.</p>
+                    </div>
+                </div>
+
+                <div class="menu-column">
+                    <div style="border: 2px dashed #a31d31; padding: 20px; border-radius: 10px; background: #0a0a0a;">
+                        <h3 style="border: none; padding: 0; color: #fff; margin-top: 0; text-align: center;">ARMA TUS CHAROLAS</h3>
+                        <p style="font-size: 0.8rem; color: #e4b242; text-align: center;">(SUSHIS A ELEGIR + TÉ GRATIS)</p>
+                        <div class="item">
+                            <div class="item-header"><span>CHAROLA 1</span> <span class="price">$590</span></div>
+                            <p class="description">Joshieru, Boneless Roll, Bombay, Hamburguesa, Torta, Papas y Té.</p>
+                        </div>
+                        <div class="item">
+                            <div class="item-header"><span>CHAROLA 2</span> <span class="price">$460</span></div>
+                            <p class="description">Avocado Surimi, Bombay, Boneless Chicos, Papas, Dedos y Té.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-page">
+            <div class="kids-section" style="background: #111; padding: 40px; border-radius: 20px;">
+                <h2 style="text-align: center; color: #e4b242; letter-spacing: 5px;">M E N Ú &nbsp; K I D S</h2>
+                <div class="menu-grid">
+                    <div class="menu-column">
+                        <div class="item">
+                            <div class="item-header"><span>NUGGETS</span> <span class="price">$95</span></div>
+                        </div>
+                        <div class="item">
+                            <div class="item-header"><span>BROCHETAS DE POLLO</span> <span class="price">2 X $70</span></div>
+                        </div>
+                    </div>
+                    <div class="menu-column">
+                        <div class="item" style="background: #222; padding: 15px; border-radius: 10px; border-left: 5px solid #e4b242;">
+                            <div class="item-header"><span style="color: #e4b242;">COMBO KIDS</span> <span class="price">$110</span></div>
+                            <p class="description" style="color: #fff;">Hamburguesa o nuggets + papas + jugo + postre.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 30px; border-top: 1px solid #333; padding-top: 20px;">
+                    <h3 style="font-size: 1rem;">ADEREZOS EXTRAS</h3>
+                    <div class="item-header"><span>CHIPOTLE</span> <span class="price">$10</span></div>
+                    <div class="item-header"><span>RANCH</span> <span class="price">$15</span></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer style="text-align: center; padding: 60px; color: #555; font-size: 0.8rem; background: #050505;">
+        <p>&copy; 2026 La Insolencia Restaurante. Todos los derechos reservados.</p>
+        <p>Los Mochis, Sinaloa.</p>
+    </footer>
+
+</body>
+</html>
